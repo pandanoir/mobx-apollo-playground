@@ -1,0 +1,17 @@
+{
+  "name": "server",
+  "version": "0.0.1",
+  "description": "",
+  "license": "MIT",
+  "author": "Naoto Ikuno <moon_in_france@yahoo.co.jp>",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./server.js",
+    "dev": "node ./server.js"
+  },
+  "dependencies": {
+    "@apollo/server": "5.0.0",
+    "graphql": "16.11.0"
+  }
+}
