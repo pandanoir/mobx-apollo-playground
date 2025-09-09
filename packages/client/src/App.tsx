@@ -17,8 +17,17 @@ const updateNoteMutation = gql`
   }
 `;
 
+const createNoteMutation = gql`
+  mutation {
+    addNote (content: "New note") {
+      id content
+    }
+  }
+`;
+
 export function App() {
   const { loading, error, data } = useQuery(getNotesQuery);
+  const [create] = useMutation(createNoteMutation);
   const [update] = useMutation(updateNoteMutation);
 
   if (loading) return <p>Loading...</p>;
@@ -27,6 +36,7 @@ export function App() {
   return (
     <div>
       {(data as any).notes.map((note) => note.content)}
+      <button onClick={() => create()}>add</button>
       <button onClick={() => update()}>update</button>
     </div>
   );
