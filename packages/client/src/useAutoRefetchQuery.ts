@@ -11,14 +11,9 @@ export const useAutoRefetchQuery = (
 ) => {
   const result = useQuery(...args);
   useEffect(() => {
-    const disposers: (() => void)[] = [];
-    for (const typename of refetchTypenames) {
-      const handler = () => result.refetch();
-      typenameEmitter.addEventListener(typename, handler);
-      disposers.push(() =>
-        typenameEmitter.removeEventListener(typename, handler),
-      );
-    }
+    const disposers = refetchTypenames.map((typename) =>
+      typenameEmitter.addEventListener(typename, () => result.refetch()),
+    );
     return () => {
       for (const disposer of disposers) {
         disposer();
